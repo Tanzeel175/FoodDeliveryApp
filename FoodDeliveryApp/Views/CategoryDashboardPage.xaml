@@ -1,0 +1,76 @@
+<Page x:Class="FoodDeliveryApp.Views.CategoryDashboardPage"
+      xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+      xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+      Title="Categories"
+      Background="Transparent"
+      Loaded="Page_Loaded">
+
+    <Grid Margin="24,16">
+        <Grid.RowDefinitions>
+            <RowDefinition Height="Auto"/>
+            <RowDefinition Height="*"/>
+        </Grid.RowDefinitions>
+
+        <!-- Header -->
+        <StackPanel Grid.Row="0" Margin="0,0,0,20">
+            <TextBlock Text="🍽️ What are you craving?"
+                       FontSize="28" FontWeight="Bold"
+                       Foreground="#4A121E"/>
+            <TextBlock Text="Select a category to view our delicious menu."
+                       FontSize="16" Foreground="#555555" Margin="0,4,0,0"/>
+        </StackPanel>
+
+        <!-- Category Grid -->
+        <ScrollViewer Grid.Row="1" VerticalScrollBarVisibility="Auto" HorizontalScrollBarVisibility="Disabled">
+            <ItemsControl x:Name="CategoriesItemsControl">
+                <ItemsControl.ItemsPanel>
+                    <ItemsPanelTemplate>
+                        <WrapPanel/>
+                    </ItemsPanelTemplate>
+                </ItemsControl.ItemsPanel>
+                <ItemsControl.ItemTemplate>
+                    <DataTemplate>
+                        <Border Width="220" Height="150"
+                                Margin="10,10,10,20"
+                                Background="#4A121E"
+                                CornerRadius="15"
+                                Cursor="Hand"
+                                MouseDown="CategoryTile_MouseDown">
+                            <!-- Click Effect and Border Color -->
+                            <Border.Style>
+                                <Style TargetType="Border">
+                                    <Setter Property="BorderThickness" Value="2"/>
+                                    <Setter Property="BorderBrush" Value="#7A1A29"/>
+                                    <Style.Triggers>
+                                        <Trigger Property="IsMouseOver" Value="True">
+                                            <Setter Property="BorderBrush" Value="#E53935"/>
+                                            <Setter Property="Background" Value="#541525"/>
+                                        </Trigger>
+                                    </Style.Triggers>
+                                </Style>
+                            </Border.Style>
+                            
+                            <Grid>
+                                <!-- Category Image -->
+                                <Image Source="{Binding ImagePath}"
+                                       Width="80" Height="80"
+                                       HorizontalAlignment="Center"
+                                       VerticalAlignment="Top"
+                                       Margin="0,15,0,0"
+                                       Stretch="Uniform"/>
+                                
+                                <!-- Category Name -->
+                                <TextBlock Text="{Binding Name}"
+                                           FontSize="22" FontWeight="Bold"
+                                           Foreground="White"
+                                           HorizontalAlignment="Center"
+                                           VerticalAlignment="Bottom"
+                                           Margin="0,0,0,15"/>
+                            </Grid>
+                        </Border>
+                    </DataTemplate>
+                </ItemsControl.ItemTemplate>
+            </ItemsControl>
+        </ScrollViewer>
+    </Grid>
+</Page>
